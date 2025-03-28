@@ -17,12 +17,16 @@ export default {
 			const data = await response.text();
 			console.log("Response from URL fetched");
 			const hasResuming = /<p[^>]*>[^<]*resuming[^<]*<\/p>/i.test(data);
+			const hasSignIn = /<h3[^>]*>[^<]*Sign in with Mendix SSO[^<]*<\/h3>/i.test(data);
 
 			if (hasResuming) {
 				console.log("App is resuming.");
 
 			} else {
-				console.log("App is running.");
+				if (hasSignIn) {
+					console.log("App is running.");
+				}
+				console.log("data" + data);
 
 			}
 		} else {
