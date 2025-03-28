@@ -7,11 +7,13 @@
 	"name": "url-caller",
 	"main": "src/index.js",
 	"compatibility_date": "2025-03-21",
+	"logpush": true,
 	"observability": {
-		"enabled": true
+		"enabled": true,
+		"head_sampling_rate": 1
 	}
 	/**
-	 * Smart Placement
+	 * Smart Placement	
 	 * Docs: https://developers.cloudflare.com/workers/configuration/smart-placement/#smart-placement
 	 */
 	// "placement": { "mode": "smart" },
