@@ -11,27 +11,21 @@
 export default {
 	async scheduled(event, env, ctx) {
 		console.log("Running task at:", event.scheduledTime);
-		const response = await fetch("https://acceleratorsuite-sandbox.mxapps.io/");
 
-		if (response.ok) {
-			const data = await response.text();
-			console.log("Response from URL fetched");
-			const hasResuming = /<p[^>]*>[^<]*resuming[^<]*<\/p>/i.test(data);
-			const hasSignIn = /<h3[^>]*>[^<]*Sign in with Mendix SSO[^<]*<\/h3>/i.test(data);
+		const url = 'https://acceleratorsuite-sandbox.mxapps.io/xas/';
+		const options = {
+			method: 'POST',
+			headers: { 'content-type': 'application/json' },
+			body: '{"action":"get_session_data","params":{"hybrid":false,"offline":false,"referrer":null,"profile":"","timezoneoffset":-60,"timezoneId":"Europe/Amsterdam","preferredLanguages":["nl","en-US","en"],"version":2},"profiledata":{"1743160627959-0":21}}'
+		};
 
-			if (hasResuming) {
-				console.log("App is resuming.");
-
-			} else {
-				if (hasSignIn) {
-					console.log("App is running.");
-				}
-				console.log("data" + data);
-
-			}
-		} else {
-			console.error("Failed to fetch URL:", response.status, response.statusText);
-
+		try {
+			const response = await fetch(url, options);
+			const data = await response.json();
+			console.log(data);
+		} catch (error) {
+			console.error(error);
 		}
+
 	}
 };
