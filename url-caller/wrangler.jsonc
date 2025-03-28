@@ -7,7 +7,6 @@
 	"name": "url-caller",
 	"main": "src/index.js",
 	"compatibility_date": "2025-03-21",
-	"logpush": true,
 	"observability": {
 		"enabled": true,
 		"head_sampling_rate": 1
